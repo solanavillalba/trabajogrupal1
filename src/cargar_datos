@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 def parsear_linea(datos):
     '''
     Convierte los datos suministrados en el tipo de dato 
@@ -29,7 +29,7 @@ def parsear_linea(datos):
     return lista
 
 
-=======
+# =======
 def cargar_datos(ruta): 
     """
     Abre un archivo de Motion Lab y ordena los datos por participante.
@@ -105,4 +105,4 @@ def cargar_datos(ruta):
         lista_con_diccionario.append(participante)
             
     return lista_con_diccionario
->>>>>>> Stashed changes
+
