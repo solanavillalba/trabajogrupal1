@@ -92,7 +92,7 @@ def cargar_datos(ruta):
             else:
                 participante["x"].append(dato[2])
             
-            if "Y" not in participante:
+            if "y" not in participante:
                 participante["y"]= [dato[3]]
             else:
                 participante["y"].append(dato[3])
