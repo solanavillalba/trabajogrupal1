@@ -88,7 +88,7 @@ def cargar_datos(ruta):
             if "x" not in participante:
                 participante["x"]= [dato[2]]
             else:
-                participante["x"].append(dato[2])
+                participante["x"].append([dato[2]])
             
             if "Y" not in participante:
                 participante["y"]= [dato[3]]
@@ -101,8 +101,13 @@ def cargar_datos(ruta):
                 participante["hit"].append(dato[4])
         
             if "condicion" not in participante:
-                participante["condicion"]= dato[5]
+                participante["condicion"]= [dato[5]]
+            else:
+                participante["condicion"].append(dato[5])
         
         lista_con_diccionario.append(participante)
             
     return lista_con_diccionario
+
+c=cargar_datos("datos_ejemplo_motionlab.csv")
+
