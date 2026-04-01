@@ -1,3 +1,41 @@
+def validar_datos(valor, tipo):
+    """
+    Valida si el str que ingreso el usuario puede ser casteado al tipo de variable que quiere.
+    
+    Parámetros:
+    valor: str
+    Elemento que quiere ver si se puede castear
+
+    tipo: str (int/float/bool)
+    Tipo al que se quiere castear el valor, tiene que ser escrito de la manera especificada y en minuscula.
+
+    Returns:
+    resultado: bool
+    False si no se puede castear o True si sí
+    """
+
+    if tipo == "bool":
+        if (valor.lower() == "true") or (valor.lower() == "false"):
+            return True
+        else:
+            return False
+        
+    if tipo == "int":
+        try:
+            validacion= int(valor)
+        except:
+            return False
+        else:
+            return True
+
+    if tipo == "float":
+        try:
+            valido= float(valor)
+        except:
+            return False
+        else:
+            return True
+
 
 def parsear_linea(datos):
     '''
@@ -13,23 +51,41 @@ def parsear_linea(datos):
     Son los elementos de los cuales se convertira su tipo de datos.
 
     Returns:
-    lista : list
-    Es la lista con los elementos ya convertidos.
+    lista : list / falso: bool (si no se pudo castear)
+    Es la lista con los elementos ya convertidos, pero si no se pudieron castear los datos devuelve False.
 
     '''
     lista = datos.split(",")
     
-    lista[0] = int(lista[0])
-    lista[1] = float(lista[1])
-    lista[2] = float(lista[2])
-    lista[3] = float(lista[3])
-    if (lista[4].lower() == "true"):
-        lista[4]= True
-    else:
-        lista[4]= False
-    lista[5] = str(lista[5])
-
-    return lista
+    while True:
+        if validar_datos(lista[0], int):
+            lista[0] = int(lista[0])
+        else:
+            return False
+        if validar_datos(lista[1], float):
+            lista[1] = float(lista[1])
+        else:
+            return False
+        
+        if validar_datos(lista[2], float):
+            lista[2] = float(lista[2])
+        else:
+            return False
+        
+        if validar_datos(lista[3], float):
+            lista[3] = float(lista[3])
+        else:
+            return False
+        
+        if validar_datos(lista[4], bool):
+            if (lista[4].lower() == "true"):
+                lista[4]= True
+            else:
+                lista[4]= False
+        else:
+            return False
+        
+        return lista
 
 
 
@@ -43,7 +99,7 @@ def cargar_datos(ruta):
     Ruta por donde se puede acceder al archivo.
     Retorna
     Datos: Lista de dicionarios
-    Lista con diccionarios, cada diccionario corresponde a un participantes con sus datos (ID, Tiempo, x, y, hit y condición). 
+    Lista con diccionarios, cada diccionario corresponde a un participantes con sus datos (ID, Tiempo, x, y, hit y condición). Si no se pudieron castear los valores de alguna lista, se informara.
     """
 
     archivo = open(ruta, "r")
@@ -57,9 +113,14 @@ def cargar_datos(ruta):
         lista_lineas.append(linea.strip())
 
     lista_valores=[]
+    contador_posicion=1
 
     for string in lista_lineas:
-        lista_valores.append(parsear_linea(string))
+        if type(parsear_linea(string)) == bool:
+            lista_valores.append(parsear_linea(string))
+            contador_posicion+=1
+        else:
+            print(f"Los datos de la fila numero {contador_posicion} no se pudieron castear.")
 
     lista_con_diccionario=[]
 
