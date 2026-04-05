@@ -1,3 +1,35 @@
+def calcular_tiempo_primer_hit(datos):
+"""
+Devuelve el primer tiempo en el que ocurrió un hit entre todos los participantes.
+    
+    Parámetros:
+    datos : list
+        Lista de diccionarios, cada diccionario contiene:
+        "ID", "tiempo", "hit", "x", "y", "condicion"
+    
+    Returns:
+    float
+        Primer tiempo donde hubo un hit, o None si no hay hits.
+    """
+#Incializador variable
+
+primer_tiempo = None
+ for participante in datos:
+    for i in range(len(participante["hit"])):
+         hit_actual = participante["hit"][i]
+         tiempo_actual = participante["tiempo"][i]
+        if hit_actual == True:
+           if primer_tiempo is None:
+                    primer_tiempo = tiempo_actual
+                elif tiempo_actual < primer_tiempo:
+                    primer_tiempo = tiempo_actual
+ return primer_tiempo
+
+
+
+
+
+
 def calcular_hits_totales(diccio):
     '''
     Calcula la cantidad de hits que tuvo el participante.
