@@ -4,7 +4,7 @@ import procesamiento_datos as p
 
 nombre_archivo = "datos_ejemplo.csv"
 lista_diccionario= c.cargar_datos(nombre_archivo)
-print(lista_diccionario)
+
 while True:
     id_participante=input("ingrese id del participante del que quiere saber los datos: ")
     if c.validar_datos(id_participante, "int"):
@@ -13,7 +13,6 @@ while True:
     print("no ingresaste un int")
     
 diccionario= p.filtar_por_participante(id_participante, lista_diccionario)
-print(diccionario)
 
 primer_hit=m.calcular_tiempo_primer_hit(diccionario)
 hits_tot=m.calcular_hits_totales(diccionario)
