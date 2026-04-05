@@ -1,4 +1,4 @@
-def filtar_por_participante(id, lista):
+def filtar_por_participante(id_participante, lista):
     '''
     A partir de un ID suministrado previamente,
     esta función se encarga de buscar un diccionario
@@ -19,7 +19,7 @@ def filtar_por_participante(id, lista):
     devuelve un None.
     '''
     for dicc in lista:
-        if id == dicc["ID"]:
+        if id_participante == dicc["ID"]:
             return dicc
 
     return None
